@@ -8,7 +8,7 @@ if (POLICY CMP0141)
 endif()
 
 file(GLOB AccountSystemSources "*.cpp" "*.h")
-add_executable (AccountSystem ${AccountSystemSources})
+add_executable (AccountSystem ${AccountSystemSources} "Input.h" "AccountSystem.h" "AccountSystem.cpp"  "Utility.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET AccountSystem PROPERTY CXX_STANDARD 20)

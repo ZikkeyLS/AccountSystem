@@ -1,27 +1,15 @@
-﻿#include "Database.h"
-
-const std::string FILENAME = "UserAccount";
+﻿#include "AccountSystem.h"
 
 int main()
 {
-	bool running = true;
-	while (running)
-	{
+	AccountSystem account = AccountSystem();
 
+	if (account.GetState() == AccountState::NotExist) {
+		account.Register();
 	}
 
-	Logger::Log("End of working cycle.");
+	account.Login();
+
+	Input::GetString();
 	return 0;
-}
-
-
-void dbCoreTest() 
-{
-	Database db = Database(FILENAME);
-
-	if (db.exists() == false)
-		db.createDB();
-
-	db.write("TestStuff");
-	Logger::Log("Written data: " + db.read());
 }

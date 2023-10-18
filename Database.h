@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Logger.h"
+#include "Utility.h"
 #include <filesystem>
 #include <fstream>
 

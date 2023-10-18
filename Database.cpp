@@ -8,18 +8,15 @@ Database::Database(const std::string& fileName)
 
 void Database::write(const std::string& data)
 {
-	if (exists() == false)
-	{
-		Logger::Log("Internal Error: We can't write to nonexistent file!");
+	if (exists() == false) {
+		Logger::info("Internal Error: We can't write to nonexistent file!");
 		return;
 	}
-
 	std::ofstream file;
 	file.open(fullName);
 
-	if (file.is_open()) 
-	{
-		file << data << std::endl;
+	if (file.is_open()) {
+		file << Utility::textToBinary(data) << std::endl;
 	}
 
 	file.close();
@@ -27,9 +24,8 @@ void Database::write(const std::string& data)
 
 std::string Database::read()
 {
-	if (exists() == false)
-	{
-		Logger::Log("Internal Error: We can't get data of nonexistent file!");
+	if (exists() == false) {
+		Logger::info("Internal Error: We can't get data of nonexistent file!");
 		return "";
 	}
 
@@ -37,18 +33,18 @@ std::string Database::read()
 	std::ifstream file;
 	file.open(fullName);
 
-	if (file.is_open())
-	{
+	if (file.is_open()) {
 		std::getline(file, outputLine);
 		file.close();
-		return outputLine;
+		return Utility::binaryToText(outputLine);
 	}
 }
 
 bool Database::createDB()
 {
-	if (exists())
+	if (exists()) {
 		return false;
+	}
 
 	std::ofstream { fullName };
 	return true;
@@ -56,8 +52,9 @@ bool Database::createDB()
 
 bool Database::deleteDB()
 {
-	if (exists() == false)
+	if (exists() == false) {
 		return false;
+	}
 
 	std::filesystem::remove(fullName);
 	return true;

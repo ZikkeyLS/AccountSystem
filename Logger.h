@@ -6,8 +6,11 @@
 class Logger
 {
 public:
-	static void Log(const std::string& message)
-	{
+	static void preinput(const std::string& message) {
+		std::cout << message;
+	}
+
+	static void info(const std::string& message) {
 		std::cout << message << std::endl;
 	}
 };
